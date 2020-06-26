@@ -1,9 +1,9 @@
-def help_calculate(num1, num2, operator):
+def Calculate_Result(num1, num2, operator):
     
     if operator == '+':
-        result = num1 + num2
+        result = float(num1) + float(num2)
     elif operator == '-':
-        result = num1 - num2
+        result = float(num1) - float(num2)
     else:
         result = 'invalid'
 

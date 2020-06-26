@@ -4,11 +4,15 @@
 <h1>
     Here you go {{ request.user }} !!
 </h1>
-    
-<p>
-    {{ object.number1 }} {{ object.operator }} {{ object.number2 }} = {{ object.result }}
-</p>
-   
 
+{% for prev_object in prev_objects %}
+    <p>
+        {{ prev_object.number1 }} {{ prev_object.operator }} {{ prev_object.number2 }} = {{ prev_object.result }}
+    </p>
+{% endfor %}
+
+{% if error != None %}
+    {{ error }}
+{% endif %}
     
 {% endblock %}
