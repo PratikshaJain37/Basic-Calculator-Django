@@ -6,12 +6,19 @@
 Hey {{ request.user }}
 </h1>
 
-<p>
-{{ num1 }} {{ operator }} {{ num2 }} =
-</p>
-<br>
-{% if result %}
-    {{ result }}
-{% endif %}
+<form method='POST' action="{% url 'result' %}">
+{% csrf_token %}
+    
+    <input type='text' name='number1' placeholder="N1" />
+    <br>
+    <input type='text' name='operator' placeholder="OPERATOR" />
+    <br>
+    <input type='text' name='number2' placeholder="N2" />
+    <br>
+    <input type='submit' value='Save' />
+    
+
+</form>
+
 
 {% endblock %}

@@ -7,4 +7,4 @@ class Calculation(models.Model):
     number1 = models.FloatField(default=1)
     number2 = models.FloatField(default=2)
     operator = models.TextField(default='+')
-    result = help_calculate(number1,number2,operator)
+    result = models.FloatField(default=0)

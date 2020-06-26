@@ -5,6 +5,6 @@ def help_calculate(num1, num2, operator):
     elif operator == '-':
         result = num1 - num2
     else:
-        result = (operator, type(operator))
+        result = 'invalid'
 
     return result

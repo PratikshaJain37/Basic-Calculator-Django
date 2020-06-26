@@ -1,25 +1,37 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calculation
+from .forms import RawForm
+from .helpers import help_calculate
 
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    obj = Calculation.objects.get(id=1)
-
+    form = RawForm()
+    
     context = {
-        "num1": obj.number1,
-        "num2": obj.number2,
-        "operator": obj.operator
+        "form":form
     }
     return render(request, "home.html", context)
 
 def result_view(request, *args, **kwargs):
-    obj = Calculation.objects.get(id=1)
+    form = RawForm()
+    if request.method == "POST":
+        form = RawForm(request.POST)
+        if form.is_valid():
+            number1=request.POST.get('number1')
+            number2=request.POST.get('number2')
+            operator=request.POST.get('operator')
+            result = help_calculate(number1, number2, operator)
+            
+            Calculation.objects.create(number1 =number1, number2=number2, operator=operator, result=result)
+
+        else:
+            print(form.errors)
+    objs = Calculation.objects.last()
+    
     context = {
-        "num1": obj.number1,
-        "num2": obj.number2,
-        "operator": obj.operator,
-        "result": obj.result
+        "object": objs,
+
     }
-    return render(request, "home.html", context)
+    return render(request, "result.html", context)

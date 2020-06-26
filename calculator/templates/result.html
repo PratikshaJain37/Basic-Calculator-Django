@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %} 
+<h1>
+    Here you go {{ request.user }} !!
+</h1>
+    
+<p>
+    {{ object.number1 }} {{ object.operator }} {{ object.number2 }} = {{ object.result }}
+</p>
+   
+
+    
+{% endblock %}
