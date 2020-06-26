@@ -1,5 +1,17 @@
-{% block page_content %} 
+{% extends "base.html" %}
 
-Hey
+{% block content %} 
+
+<h1>
+Hey {{ request.user }}
+</h1>
+
+<p>
+{{ num1 }} {{ operator }} {{ num2 }} =
+</p>
+<br>
+{% if result %}
+    {{ result }}
+{% endif %}
 
 {% endblock %}

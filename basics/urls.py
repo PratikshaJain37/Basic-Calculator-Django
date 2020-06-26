@@ -17,11 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from calculator.views import Home_View, Result_View
+from calculator.views import home_view, result_view
 
 urlpatterns = [
-    path('', Home_View, name='home'),
-    path('result/', Result_View, name='result'),
+    path('', home_view, name='home'),
+    path('result/', result_view, name='result'),
     url(r'^admin/', admin.site.urls),
     
 ]
