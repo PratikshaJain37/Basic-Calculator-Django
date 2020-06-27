@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calculation
-from .forms import RawForm, CalculationForm
+from .forms import CalculationForm
 from .helpers import Calculate_Result
-import datetime
+from django.utils import timezone
 
 # Create your views here.
 
@@ -25,7 +25,7 @@ def result_view(request, *args, **kwargs):
             number2=request.POST.get('number2')
             operator=request.POST.get('operator')
             result = Calculate_Result(number1, number2, operator)
-            asked_time = datetime.datetime.now()
+            asked_time = timezone.now()
             
             if result != 'invalid':
                 # Creating object in database
@@ -35,22 +35,22 @@ def result_view(request, *args, **kwargs):
             else:
                 error = 'Operator is invalid'
 
-            # Saving the last id
-            last_id = Calculation.objects.last().id
-
-            # Filtering only the last 5
-            prev_objects = Calculation.objects.filter(id__gt=last_id-5)
-
-            # Deleting all previous ones, so that max 5 can remain at a time
-            Calculation.objects.filter(id__lt=last_id-4).delete()
-    
-            context = {
-                "prev_objects": prev_objects,
-                "error": error
-            }
-            
         else:
             print(form.errors)
-            context = {}
+            error = 'Number(s) is/are invalid'
+            
+        # Saving the last id
+        last_id = Calculation.objects.last().id
+
+        # Filtering only the last 5
+        prev_objects = Calculation.objects.filter(id__gt=last_id-5)
+
+        # Deleting all previous ones, so that max 5 can remain at a time
+        Calculation.objects.filter(id__lt=last_id-4).delete()
+
+        context = {
+            "prev_objects": prev_objects,
+            "error": error
+        }
     
     return render(request, "result.html", context)
