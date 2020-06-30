@@ -6,19 +6,28 @@
 Hey {{ request.user }}
 </h1>
 
-<form method='POST' action="{% url 'result' %}">
+<form method='POST' action="{% url 'result' %}" id='Calculate'>
 {% csrf_token %}
     
+    
     <input type='text' name='number1' placeholder="N1" />
-    <br>
-    <input type='text' name='operator' placeholder="OPERATOR" />
+    
     <br>
     <input type='text' name='number2' placeholder="N2" />
     <br>
-    <input type='submit' value='Save' />
-    
 
+    {% for radio in form.operator %}
+   
+        {{ radio }}
+ 
+    {% endfor %}
+    <br>
+    <input type='submit' value='Save' />
+  
+   
 </form>
+
+
 
 
 {% endblock %}

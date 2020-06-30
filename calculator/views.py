@@ -1,23 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calculation
-from .forms import CalculationForm
+from .forms import RawForm
 from .helpers import Calculate_Result
 from django.utils import timezone
 
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    form = CalculationForm()
+    form = RawForm()
     context = {
         "form":form
     }
     return render(request, "home.html", context)
 
 def result_view(request, *args, **kwargs):
-    form = CalculationForm()
+    form = RawForm(request.GET)
     if request.method == "POST":
-        form = CalculationForm(request.POST)
+        form = RawForm(request.POST)
         if form.is_valid():
 
             # Setting up values
@@ -26,6 +26,7 @@ def result_view(request, *args, **kwargs):
             operator=request.POST.get('operator')
             result = Calculate_Result(number1, number2, operator)
             asked_time = timezone.now()
+
             
             if result != 'invalid':
                 # Creating object in database
