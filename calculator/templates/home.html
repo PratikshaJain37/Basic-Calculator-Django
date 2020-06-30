@@ -2,27 +2,35 @@
 
 {% block content %} 
 
+
 <h1>
 Hey {{ request.user }}
 </h1>
+<br>
+
+
 
 <form method='POST' action="{% url 'result' %}" id='Calculate'>
 {% csrf_token %}
     
-    
-    <input type='text' name='number1' placeholder="N1" />
-    
+    <div class='text-field'>
+        <input type='text' name='number1' placeholder="A Number" />
+    </div>
     <br>
-    <input type='text' name='number2' placeholder="N2" />
+    <div class='text-field'>
+        <input type='text' name='number2' placeholder="Another Number" />
     <br>
-
+    </div>
+    <br>
     {% for radio in form.operator %}
-   
-        {{ radio }}
- 
+        <span class="radio">{{ radio.tag }}</span>
+        <label for="{{ radio.id_for_label }}">
+        {{ radio.choice_label }}
+        </label>
+        <br>
     {% endfor %}
-    <br>
-    <input type='submit' value='Save' />
+  
+    <input type='submit' value='Calculate' />
   
    
 </form>
