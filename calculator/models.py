@@ -6,12 +6,16 @@ Operator_Choices =(
     ("+", "Add"), 
     ("-", "Subtract"), 
     ("*", "Multiply"), 
-    ("/", "Divide"),  
+    ("/", "Divide"),
+    ("!", "Find Factorial"),
+    ("%", "Find percentage"),  
+    ("**", "Find exponent"),
+    ("//", "Find quotient and remainder")
 ) 
 
 class Calculation(models.Model):
     number1 = models.FloatField(default=0)
-    number2 = models.FloatField(default=0)
+    number2 = models.CharField(default="", blank=True, null=True, max_length=100000000)
     operator = models.CharField(max_length=2, choices = Operator_Choices, default = '+')
     result = models.CharField(max_length=200, default=0)
     asked_time = models.DateTimeField(default=timezone.now)

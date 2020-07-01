@@ -24,10 +24,10 @@ def result_view(request, *args, **kwargs):
             number1=request.POST.get('number1')
             number2=request.POST.get('number2')
             operator=request.POST.get('operator')
-            result = Calculate_Result(number1, number2, operator)
+            result = Calculate_Result(number1, operator, number2)
             asked_time = timezone.now()
 
-            
+            print(number2)
             if result != 'invalid':
                 # Creating object in database
                 Calculation.objects.create(number1=number1, number2=number2, operator=operator, result=result, asked_time=asked_time)
@@ -40,7 +40,7 @@ def result_view(request, *args, **kwargs):
             print(form.errors)
             error = 'Number(s) is/are invalid'
             
-        # Saving the last id
+        # Saving the last id number
         last_id = Calculation.objects.last().id
 
         # Filtering only the last 5
@@ -55,3 +55,5 @@ def result_view(request, *args, **kwargs):
         }
     
     return render(request, "result.html", context)
+
+

@@ -4,11 +4,20 @@
 <h1>
     Here you go:)
 </h1>
+<br>
 
 {% for prev_object in prev_objects %}
+    {% if forloop.last %}
+    <p> <b>
+        {{ prev_object.number1 }} {{ prev_object.operator }} {{ prev_object.number2 }} = {{ prev_object.result }}
+    </b></p>
+
+    {% else %}
     <p>
         {{ prev_object.number1 }} {{ prev_object.operator }} {{ prev_object.number2 }} = {{ prev_object.result }}
     </p>
+
+    {% endif %}
 {% endfor %}
 
 {% if error != None %}

@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     
     # own 
     'calculator',
-    'products',
 ]
 
 MIDDLEWARE = [
