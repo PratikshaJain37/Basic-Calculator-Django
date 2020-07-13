@@ -26,7 +26,7 @@ SECRET_KEY = '17+zv6h=gywc8z)z6!rqq)oq)ie$v$1)iul)atf%j9%0zb1#iz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pratiksha.pythonanywhere.com']
 
 
 # Application definition
@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party apps
-    
-    # own 
+
+    # own
     'calculator',
 ]
 
